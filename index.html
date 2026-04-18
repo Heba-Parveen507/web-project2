@@ -209,27 +209,17 @@
       overflow: hidden;
       transition: 0.3s;
     }
+    .btn a{
+      text-decoration: none;
+      color: #000;
+    }
 
     .btn:hover {
       transform: scale(1.1);
       box-shadow: 0 0 25px gold;
     }
 
-    /* RIPPLE */
-    .btn span {
-      position: absolute;
-      background: rgba(255, 255, 255, 0.6);
-      transform: scale(0);
-      border-radius: 50%;
-      animation: ripple 0.6s linear;
-    }
-
-    @keyframes ripple {
-      to {
-        transform: scale(4);
-        opacity: 0;
-      }
-    }
+   
 
     /* SCROLL */
     .scroll {
@@ -763,7 +753,7 @@
 
       <p>Step into elegance, style, and perfection crafted just for you.</p>
 
-      <button class="btn" onclick="ripple(event)">Explore</button>
+      <button class="btn"> <a href="#services">Explore</a></button>
 
     </div>
 
@@ -948,24 +938,7 @@
     function closeMenu() {
       menu.classList.remove("active");
     }
-    // ===== RIPPLE EFFECT =====
-    function ripple(e) {
-      let btn = e.currentTarget;
-      let circle = document.createElement("span");
-
-      let rect = btn.getBoundingClientRect();
-      let size = Math.max(rect.width, rect.height);
-
-      circle.style.width = circle.style.height = size + "px";
-      circle.style.left = e.clientX - rect.left - size / 2 + "px";
-      circle.style.top = e.clientY - rect.top - size / 2 + "px";
-
-      btn.appendChild(circle);
-
-      setTimeout(() => {
-        circle.remove();
-      }, 600);
-    }
+ 
     // ===== SCROLL REVEAL ANIMATION =====
     function revealOnScroll() {
       let reveals = document.querySelectorAll(".reveal");
