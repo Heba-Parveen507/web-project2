@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxury 3D Navbar</title>
+
+  <style>
+    /* ===== GLOBAL ===== */
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: black;
+      color: white;
+    }
+
+    /* ===== NAVBAR ===== */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background: linear-gradient(90deg, #000, #111);
+      border-bottom: 1px solid gold;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    /* ===== LOGO ===== */
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      background: linear-gradient(45deg, gold, #ffcc70);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* ===== MENU ===== */
+    .menu {
+      display: flex;
+      gap: 25px;
+    }
+
+    /* ===== LINKS (3D EFFECT) ===== */
+    .menu a {
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+      position: relative;
+      display: inline-block;
+      transition: all 0.3s ease;
+      transform-style: preserve-3d;
+    }
+
+    /* 3D HOVER EFFECT */
+    .menu a:hover {
+      color: gold;
+      transform: translateY(-6px) scale(1.08) rotateX(10deg);
+      text-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+    }
+
+    /* GOLD UNDERLINE */
+    .menu a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, gold, #ffcc70);
+      transition: 0.3s;
+      box-shadow: 0 0 10px gold;
+    }
+
+    .menu a:hover::after {
+      width: 100%;
+    }
+
+    /* ===== HAMBURGER ===== */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: gold;
+      margin: 4px 0;
+      transition: 0.3s;
+      border-radius: 5px;
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px) {
+
+      .menu {
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background: #111;
+        flex-direction: column;
+        width: 220px;
+        display: none;
+        padding: 20px;
+        border-left: 2px solid gold;
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+      }
+
+      .menu.active {
+        display: flex;
+        animation: slide 0.3s ease;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    /* VIDEO */
+    .hero video {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      min-width: 100%;
+      min-height: 100%;
+      transform: translate(-50%, -50%);
+      object-fit: cover;
+    }
+
+    /* OVERLAY */
+    .overlay {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+    }
+
+    /* CONTENT */
+    .hero-content {
+      position: relative;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+    }
+
+    /* TYPING TEXT */
+    .typing {
+      font-size: 45px;
+      font-weight: bold;
+      background: linear-gradient(45deg, gold, #ffcc70);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      border-right: 3px solid gold;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(20) forwards, blink 0.8s infinite;
+    }
+
+    @keyframes typing {
+      from {
+        width: 0;
+      }
+
+      to {
+        width: 320px;
+      }
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* TEXT */
+    .hero-content p {
+      color: #ddd;
+      margin-top: 15px;
+      max-width: 500px;
+    }
+
+    /* BUTTON */
+    .btn {
+      margin-top: 25px;
+      padding: 12px 30px;
+      background: linear-gradient(45deg, gold, #ffcc70);
+      border: none;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px gold;
+    }
+
+    /* RIPPLE */
+    .btn span {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.6);
+      transform: scale(0);
+      border-radius: 50%;
+      animation: ripple 0.6s linear;
+    }
+
+    @keyframes ripple {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* SCROLL */
+    .scroll {
+      position: absolute;
+      bottom: 20px;
+      color: gold;
+      text-align: center;
+      animation: bounce 1.5s infinite;
+    }
+
+    .scroll div {
+      width: 18px;
+      height: 18px;
+      border-right: 2px solid gold;
+      border-bottom: 2px solid gold;
+      transform: rotate(45deg);
+      margin: auto;
+    }
+
+    @keyframes bounce {
+      50% {
+        transform: translateY(10px);
+      }
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .typing {
+        font-size: 28px;
+      }
+    }
+
+    /* ===== ANIMATION ===== */
+    @keyframes slide {
+      from {
+        opacity: 0;
+        transform: translateX(50px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* ===== ABOUT SECTION ===== */
+    .about {
+      background:burlywood;
+      color: white;
+      padding: 100px 20px;
+    }
+
+    /* CONTAINER */
+    .about-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    /* TEXT */
+    .about-text {
+      max-width: 500px;
+    }
+
+    .about-text h2 {
+      font-size: 40px;
+      background: linear-gradient(45deg,goldenrod, black);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-text h3 {
+      margin-top: 10px;
+      font-size: 22px;
+      color:black;
+    }
+
+    .about-text p {
+      margin-top: 15px;
+      color:black;
+      line-height: 1.6;
+    }
+
+    /* LIST */
+    .about-text ul {
+      margin-top: 20px;
+      padding: 0;
+    }
+
+    .about-text li {
+      list-style: none;
+      margin: 10px 0;
+      color: black;
+      font-size: 16px;
+    }
+
+    /* IMAGE */
+    .about-image img {
+      width: 250px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+      transition: 0.5s;
+    }
+
+    .about-image img:hover {
+      transform: scale(1.05);
+    }
+
+    /* ===== SCROLL REVEAL ANIMATION ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(80px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* MOBILE */
+    @media (max-width: 768px) {
+      .about-container {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .about-text h2 {
+        font-size: 30px;
+      }
+    }
+
+    /* ===== SERVICES SECTION ===== */
+    .services {
+      background: #000;
+      padding: 100px 20px;
+      text-align: center;
+      color: white;
+      margin-top: 100px;
+    }
+
+    /* TITLE */
+    .title {
+      font-size: 40px;
+      margin-bottom: 50px;
+      background: linear-gradient(45deg, gold, #ffcc70);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      padding: 20px;
+      margin-top: -150px;
+    }
+
+    /* GRID */
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      justify-items: center;
+    }
+
+    /* CARD */
+    .card {
+      background: #111;
+      padding: 60px 20px 25px;
+      width: 220px;
+      border-radius: 20px;
+      position: relative;
+      text-align: center;
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.1);
+      transition: 0.4s;
+    }
+
+    /* HOVER POP EFFECT */
+    .card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+    }
+
+    /* ROUND IMAGE (OVERLAP) */
+    .avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      object-fit: cover;
+      position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 3px solid gold;
+      box-shadow: 0 0 15px gold;
+    }
+
+    /* TEXT */
+    .card h3 {
+      margin-top: 10px;
+      color: gold;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+
+    /* SCROLL ANIMATION */
+    .reveal {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: #000;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 40px;
+      color: gold;
+      padding: 20px;
+    }
+
+    /* FORM */
+    .form-box {
+      background: #111;
+      padding: 30px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .form-box input,
+    .form-box select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, gold, #ffcc70);
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 30px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0a0a0a;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /* GALLERY */
+    .gallery {
+      overflow: hidden;
+      width: 100%;
+      padding: 20px 0;
+      background:burlywood;
+      padding-top: 0px;
+      margin-top: -10px;
+    }
+
+    .gallery-track {
+      display: flex;
+      width: calc(200%);
+      animation: scroll 9s linear infinite;
+      cursor: pointer;
+      padding-top: 50px;
+      
+    }
+
+    .gallery-track img {
+      width: 250px;
+      height: 180px;
+      object-fit: cover;
+      margin: 0 10px;
+      border-radius: 50px;
+      transition: transform 0.3s;
+      border: 2px solid black;
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.5);
+    }
+
+    .gallery-track img:hover {
+      transform: scale(1.3);
+    }
+
+    /* Animation */
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+
+    /* FOOTER CONTENT */
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .footer-content h3 {
+      color: gold;
+    }
+
+    .footer-content a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+
+    .footer-content a:hover {
+      color: gold;
+    }
+
+    /* COPYRIGHT */
+    .footer .copyright {
+      font-size: 13px;
+      color: #888;
+    }
+
+
+    /* ===== CONTACT ===== */
+    .contact {
+      background: #000;
+      color: white;
+      padding: 80px 20px;
+      text-align: center;
+    }
+
+    .title {
+      font-size: 40px;
+      color: gold;
+      margin-bottom: 30px;
+    }
+
+    /* FORM */
+    .form-box {
+      background: #111;
+      padding: 30px;
+      max-width: 400px;
+      margin: auto;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+
+    .form-box input,
+    .form-box select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(45deg, gold, #ffcc70);
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      border-radius: 30px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: #0a0a0a;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+
+
+    /* FOOTER CONTENT */
+    .footer-content {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-bottom: 20px;
+    }
+
+    .footer-content h3 {
+      color: gold;
+    }
+
+    .footer-content a {
+      display: block;
+      color: white;
+      text-decoration: none;
+      margin: 5px 0;
+    }
+
+    .footer-content a:hover {
+      color: gold;
+    }
+
+    /* COPYRIGHT */
+    .footer .copyright {
+      font-size: 13px;
+      color: #888;
+    }
+
+     /* WHATSAPP BUTTON */
+    .whatsapp {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #25D366;
+      color: #fff;
+      padding: 15px;
+      border-radius: 50%;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    .footer {
+      background-color:burlywood;
+      color: black;
+      padding: 40px 20px 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer a {
+      color:black;
+      text-decoration: none;
+    }
+
+    .footer a:hover {
+      color: #fff;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .footer-section {
+      flex: 1;
+      min-width: 250px;
+      margin: 10px;
+    }
+
+    .footer-section h3 {
+      margin-bottom: 15px;
+    }
+
+    .footer-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .footer-section ul li {
+      margin-bottom: 10px;
+    }
+
+    .social-icons a {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      border-top: 1px solid #444;
+      margin-top: 20px;
+      padding-top: 10px;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <div class="logo">GLOSSIP</div>
+
+    <div class="menu" id="menu">
+      <a href="#home" onclick="closeMenu()">Home</a>
+      <a href="#about" onclick="closeMenu()">About</a>
+      <a href="#services" onclick="closeMenu()">Services</a>
+      <a href="#gallery" onclick="closeMenu()">Gallery</a>
+      <a href="#contact" onclick="closeMenu()">Contact</a>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </nav>
+  <div class="hero">
+
+    <video autoplay muted loop id="home">
+      <source src="herovideo.mp4" type="video/mp4">
+    </video>
+
+    <div class="overlay"></div>
+
+    <div class="hero-content">
+
+      <div class="typing">Luxury Salon</div>
+
+      <p>Step into elegance, style, and perfection crafted just for you.</p>
+
+      <button class="btn" onclick="ripple(event)">Explore</button>
+
+    </div>
+
+    <div class="scroll">
+      Scroll Down
+      <div></div>
+    </div>
+
+  </div>
+  <section class="about" id="about">
+
+    <div class="about-container">
+
+      <div class="about-text reveal">
+        <h2>About Us</h2>
+        <h3>Luxury. Style. Confidence.</h3>
+
+        <p>
+          We are a premium beauty destination dedicated to enhancing your natural elegance.
+          Our salon blends modern techniques with luxury care to give you a world-class experience.
+        </p>
+
+        <ul>
+          <li>✨ Expert Professionals</li>
+          <li>💎 Premium Products</li>
+          <li>🎯 Personalized Styling</li>
+        </ul>
+      </div>
+
+      <div class="about-image reveal">
+        <img src="modell.jpeg" alt="About Image">
+      </div>
+
+    </div>
+
+  </section>
+  <section class="services" id="services">
+
+    <h2 class="title reveal">Our Services</h2>
+
+    <div class="services-container">
+
+      <div class="card reveal">
+        <img src="mm1.jpg" class="avatar">
+        <h3>Hair Styling</h3>
+        <p>Premium cuts, styling & luxury hair treatments.</p>
+      </div>
+
+      <div class="card reveal">
+        <img src="mm2.jpg" class="avatar">
+        <h3>Facial Care</h3>
+        <p>Glow-enhancing skincare with top luxury products.</p>
+      </div>
+
+      <div class="card reveal">
+        <img src="mm3.jpg" class="avatar">
+        <h3>Makeup</h3>
+        <p>Bridal & party makeup with elegant finishing.</p>
+      </div>
+
+      <div class="card reveal">
+        <img src="mm4.jpg" class="avatar">
+        <h3>Spa Therapy</h3>
+        <p>Relaxing full-body spa experience & rejuvenation.</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ===== CONTACT SECTION ===== -->
+  <section class="contact" id="contact">
+
+
+
+    <!-- APPOINTMENT FORM -->
+    <div class="form-box">
+      <h2 class="title">Contact Us</h2>
+      <h3>Book Appointment</h3>
+
+
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="number" id="phone" placeholder="Phone Number" required>
+      <select id="service" required>
+        <option>Hair Styling</option>
+        <option>Facial</option>
+        <option>Makeup</option>
+        <option>Spa</option>
+      </select>
+
+      <button onclick="sendWhatsApp()">Send on WhatsApp</button>
+    </div>
+
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+
+
+    <!-- GALLERY -->
+    <section class="gallery" id="gallery">
+      <h2 class="title" id="gallery">gallery</h2>
+      <div class="gallery-track" id="galleryTrack">
+        <img src="mm1.jpg">
+        <img src="mm2.jpg">
+        <img src="mm3.jpg">
+        <img src="mm4.jpg">
+        <img src="mm1.jpg">
+        <img src="mm2.jpg">
+        <img src="mm3.jpg">
+
+
+        <!-- Duplicate images for smooth infinite loop -->
+        <img src="mm1.jpg">
+        <img src="mm2.jpg">
+        <img src="mm3.jpg">
+        <img src="mm4.jpg">
+        <img src="mm1.jpg">
+        <img src="mm2.jpg">
+        <img src="mm3.jpg">
+
+      </div>
+    </section>
+    <footer class="footer">
+    <div class="footer-container">
+
+      <!-- Company Info -->
+      <div class="footer-section">
+        <h3>GLOSSIP</h3>
+        <p>Richards Town<br>Bangalore, India </p>
+        <p>Phone: <a href="tel:+919845432154">+919845432154</a></p>
+        <p>Email: <a href="mailto:info@yourcompany.com">info@yourcompany.com</a></p>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#booking">Book</a></li>
+          <li><a href="#special">menu</a></li>
+        </ul>
+      </div>
+
+      <!-- Social Media -->
+      <div class="footer-section">
+        <h3>Connect Us</h3>
+        <div class="social-icons">
+          <a href=""
+            target="_blank">Instagram</a>
+          <a href="" target="_blank">Facebook</a>
+      
+
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2026 Your Company. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- WHATSAPP -->
+  <a href="https://wa.me/+919845432154" class="whatsapp">💬</a>
+
+   
+
+  </footer>
+
+ 
+
+  <script>
+    const menu = document.getElementById("menu");
+
+    function toggleMenu() {
+      menu.classList.toggle("active");
+    }
+
+    function closeMenu() {
+      menu.classList.remove("active");
+    }
+    // ===== RIPPLE EFFECT =====
+    function ripple(e) {
+      let btn = e.currentTarget;
+      let circle = document.createElement("span");
+
+      let rect = btn.getBoundingClientRect();
+      let size = Math.max(rect.width, rect.height);
+
+      circle.style.width = circle.style.height = size + "px";
+      circle.style.left = e.clientX - rect.left - size / 2 + "px";
+      circle.style.top = e.clientY - rect.top - size / 2 + "px";
+
+      btn.appendChild(circle);
+
+      setTimeout(() => {
+        circle.remove();
+      }, 600);
+    }
+    // ===== SCROLL REVEAL ANIMATION =====
+    function revealOnScroll() {
+      let reveals = document.querySelectorAll(".reveal");
+
+      for (let i = 0; i < reveals.length; i++) {
+        let windowHeight = window.innerHeight;
+        let elementTop = reveals[i].getBoundingClientRect().top;
+        let elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          reveals[i].classList.add("active");
+        } else {
+          reveals[i].classList.remove("active");
+        }
+      }
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+
+
+    // ===== WHATSAPP FORM SEND WITH VALIDATION =====
+    function sendWhatsApp() {
+
+      let name = document.getElementById("name").value.trim();
+      let phone = document.getElementById("phone").value.trim();
+      let service = document.getElementById("service").value;
+
+      // ===== VALIDATION =====
+      if (name === "") {
+        alert("Please enter your name");
+        return;
+      }
+
+      if (phone === "") {
+        alert("Please enter your phone number");
+        return;
+      }
+
+      if (phone.length < 10) {
+        alert("Please enter a valid phone number");
+        return;
+      }
+
+      if (!service) {
+        alert("Please select a service");
+        return;
+      }
+
+      // ===== WHATSAPP MESSAGE =====
+      let message =
+        `Hello, I want an appointment:%0A` +
+        `Name: ${name}%0A` +
+        `Phone: ${phone}%0A` +
+        `Service: ${service}`;
+
+      let url = `https://wa.me/919845432154?text=${message}`;
+
+      window.open(url, "_blank");
+    }
+
+
+  </script>
+
+</body>
+
+</html>
